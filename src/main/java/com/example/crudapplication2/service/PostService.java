@@ -7,7 +7,7 @@ import java.util.List;
 
 public class PostService implements PostServiceInter{
     @Override
-    public String createPost(Long id, Post post) {
+    public PostDto createPost(Long id, Post post) {
         return null;
     }
 

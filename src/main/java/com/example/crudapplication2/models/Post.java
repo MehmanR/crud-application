@@ -21,7 +21,7 @@ public class Post {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "create_date")
+    @Column(name = "create_date",updatable = false)
     private LocalDateTime createDate;
 
     @Column(name = "edit_date")
