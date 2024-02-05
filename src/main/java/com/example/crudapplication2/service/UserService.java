@@ -52,6 +52,18 @@ public class UserService implements UserServiceInter {
 
     @Override
     public void updateUserById(Long id, UserDto userDto) {
+        Optional<User> byId = userRepository.findById(id);
+        if (!byId.isPresent()) {
+            System.out.println("User not found by id: " + id);
+        }
+        User user = byId.get();
+        user.setName(userDto.getName());
+        user.setSurname(userDto.getSurname());
+        user.setEmail(user.getEmail());
+        user.setPhoneNumber(userDto.getPhoneNumber());
+        user.setBirthDate(userDto.getBirthDate());
+        user.setUpdateDate(LocalDateTime.now());
+        userRepository.save(user);
 
     }
 
