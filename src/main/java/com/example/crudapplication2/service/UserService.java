@@ -57,6 +57,13 @@ public class UserService implements UserServiceInter {
 
     @Override
     public void deleteUserById(Long id) {
+        Optional<User> byId = userRepository.findById(id);
+        if (byId.isPresent()) {
+            userRepository.deleteById(id);
+        } else {
+            System.out.println("User not found by id:" + id);
+        }
+
 
     }
 
