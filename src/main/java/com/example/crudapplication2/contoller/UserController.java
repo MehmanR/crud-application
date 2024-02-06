@@ -15,6 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/users")
+@CrossOrigin
 public class UserController {
 
     UserServiceInter userServicer;
@@ -28,7 +29,7 @@ public class UserController {
 
         RegisterDto user = userServicer.createUser(userDto);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(user);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
 
