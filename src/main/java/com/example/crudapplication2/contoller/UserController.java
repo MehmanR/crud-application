@@ -2,12 +2,9 @@ package com.example.crudapplication2.contoller;
 
 import com.example.crudapplication2.dto.RegisterDto;
 import com.example.crudapplication2.dto.UserDto;
-import com.example.crudapplication2.models.User;
 import com.example.crudapplication2.service.UserServiceInter;
 import jakarta.validation.Valid;
-import org.springframework.data.repository.Repository;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,16 +15,16 @@ import java.util.List;
 @CrossOrigin
 public class UserController {
 
-    UserServiceInter userServicer;
+    UserServiceInter userService;
 
     public UserController(UserServiceInter userService) {
-        this.userServicer = userService;
+        this.userService = userService;
     }
 
     @PostMapping()
     public ResponseEntity<RegisterDto> createUser(@Valid @RequestBody RegisterDto userDto) {
 
-        RegisterDto user = userServicer.createUser(userDto);
+        RegisterDto user = userService.createUser(userDto);
 
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
@@ -35,7 +32,7 @@ public class UserController {
 
     @GetMapping("{id}")
     public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") Long id) {
-        UserDto userById = userServicer.getUserById(id);
+        UserDto userById = userService.getUserById(id);
         if (userById == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
@@ -44,20 +41,20 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<List<UserDto>> getAllUsers() {
-        List<UserDto> allUsers = userServicer.getAllUsers();
+        List<UserDto> allUsers = userService.getAllUsers();
         return ResponseEntity.status(HttpStatus.FOUND).body(allUsers);
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<String> deleteUserById(@PathVariable(name = "id") Long id) {
-        userServicer.deleteUserById(id);
+        userService.deleteUserById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateUserById(@PathVariable(name = "id") Long id ,@RequestBody UserDto userDto) {
+    public ResponseEntity<String> updateUserById(@Valid @PathVariable(name = "id") Long id , @RequestBody UserDto userDto) {
 
-        userServicer.updateUserById(id,userDto);
+        userService.updateUserById(id,userDto);
 
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
 

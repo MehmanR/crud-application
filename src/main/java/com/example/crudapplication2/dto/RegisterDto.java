@@ -27,7 +27,7 @@ public class RegisterDto {
     private String surname;
 
     @NotBlank
-    @Email(message = "email duzgun daxil edin!")
+    @Email(message = "Email yalnışdır")
     @Size(min = 8,max = 255)
     private String email;
 
@@ -38,7 +38,7 @@ public class RegisterDto {
     @JsonProperty(value = "phone")
     @NotBlank
     @Size(min = 12,max = 14)
-    @Pattern(regexp = "[+][0-9]{12}", message = "Telefonu duzgun daxil edin")
+    @Pattern(regexp = "[+][0-9]{12}", message = "Telefon nomresi yalnışdır!")
     private String phoneNumber;
 
     @JsonProperty(value = "birthday")

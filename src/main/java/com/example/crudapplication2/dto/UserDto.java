@@ -7,12 +7,12 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+
 
 @Setter
 @Getter
 @Builder
-@JsonInclude
+@JsonInclude(value = JsonInclude.Include.NON_NULL)
 public class UserDto {
 
     @NotBlank
@@ -24,7 +24,7 @@ public class UserDto {
     private String surname;
 
     @NotBlank
-    @Email(message = "email duzgun daxil edin!")
+    @Email(message = "Email duzgun daxil edin!")
     @Size(min = 8, max = 255)
     private String email;
 
