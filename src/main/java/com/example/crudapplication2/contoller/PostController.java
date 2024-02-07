@@ -1,6 +1,7 @@
 package com.example.crudapplication2.contoller;
 
 import com.example.crudapplication2.dto.PostDto;
+import com.example.crudapplication2.dto.UserDto;
 import com.example.crudapplication2.models.Post;
 import com.example.crudapplication2.service.PostServiceInter;
 import jakarta.validation.Valid;
@@ -23,6 +24,19 @@ public class PostController {
         PostDto createdPost = postServiceInter.createPost(userid, postDto);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(createdPost);
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<PostDto> getPostByPostId(@PathVariable(name = "id") Long id) {
+        PostDto postByPostId = postServiceInter.getPostByPostId(id);
+
+        return ResponseEntity.status(HttpStatus.FOUND).body(postByPostId);
+    }
+
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deletePosById(@PathVariable(name = "id") Long id){
+        postServiceInter.deletePostById(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 
