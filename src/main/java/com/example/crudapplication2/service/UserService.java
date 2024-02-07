@@ -17,8 +17,11 @@ import java.util.Optional;
 @Service
 public class UserService implements UserServiceInter {
 
-    @Autowired
     UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public List<UserDto> getAllUsers() {
@@ -40,7 +43,6 @@ public class UserService implements UserServiceInter {
     @Override
     @Transactional(rollbackFor = SQLException.class)
     public RegisterDto createUser(RegisterDto userDto) {
-
 
         User user = userDtoToUser(userDto);
         user.setCreateDate(LocalDateTime.now());

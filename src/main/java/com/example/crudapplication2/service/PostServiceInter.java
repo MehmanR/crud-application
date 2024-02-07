@@ -6,7 +6,7 @@ import com.example.crudapplication2.models.Post;
 import java.util.List;
 
 public interface PostServiceInter {
-    PostDto createPost(Long id, Post post);
+    PostDto createPost(Long id, PostDto post);
     List<PostDto> getAllPostByUserId(Long id);
     PostDto getPostByPostId(Long id);
     void updatePostDescription(Long id, String description);
