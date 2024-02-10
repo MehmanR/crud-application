@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/posts")
 public class PostController {
 
-    PostServiceInter postServiceInter;
+    private final PostServiceInter postServiceInter;
 
     public PostController(PostServiceInter postServiceInter) {
         this.postServiceInter = postServiceInter;

@@ -1,24 +1,32 @@
 package com.example.crudapplication2.service;
 
 import com.example.crudapplication2.dto.PostDto;
+import com.example.crudapplication2.dto.UserDto;
 import com.example.crudapplication2.models.Post;
 import com.example.crudapplication2.repository.PostRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class PostService implements PostServiceInter {
-    PostRepository postRepository;
+    private final PostRepository postRepository;
+    private final UserServiceInter userServiceInter;
 
-    public PostService(PostRepository postRepository) {
+    public PostService(PostRepository postRepository, UserServiceInter userServiceInter) {
         this.postRepository = postRepository;
+        this.userServiceInter = userServiceInter;
     }
 
     @Override
+    @Transactional(rollbackFor = SQLException.class)
     public PostDto createPost(Long id, PostDto postdto) {
+        UserDto userById = userServiceInter.getUserById(id);
+        postdto.setUser(userById);
 
         Post post = postDtoToPost(postdto);
         Post savePost = postRepository.save(post);

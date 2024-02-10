@@ -21,6 +21,6 @@ public class PostDto {
     private String description;
 
     @NotBlank
-    private User user;
+    private UserDto user;
 
 }

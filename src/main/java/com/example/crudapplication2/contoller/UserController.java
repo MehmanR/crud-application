@@ -19,7 +19,7 @@ import java.util.List;
 @Validated
 public class UserController {
 
-    UserServiceInter userService;
+    private final UserServiceInter userService;
 
     public UserController(UserServiceInter userService) {
         this.userService = userService;
