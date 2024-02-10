@@ -4,8 +4,11 @@ import com.example.crudapplication2.dto.RegisterDto;
 import com.example.crudapplication2.dto.UserDto;
 import com.example.crudapplication2.service.UserServiceInter;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -13,6 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1/users")
 @CrossOrigin
+@Validated
 public class UserController {
 
     UserServiceInter userService;
@@ -31,11 +35,9 @@ public class UserController {
 
 
     @GetMapping("{id}")
-    public ResponseEntity<UserDto> getUserById(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<UserDto> getUserById(@Positive @NotBlank @PathVariable(name = "id") Long id) {
         UserDto userById = userService.getUserById(id);
-        if (userById == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+
         return ResponseEntity.status(HttpStatus.FOUND).body(userById);
     }
 

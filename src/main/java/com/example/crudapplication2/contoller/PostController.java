@@ -34,7 +34,7 @@ public class PostController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<String> deletePosById(@PathVariable(name = "id") Long id){
+    public ResponseEntity<String> deletePosById(@PathVariable(name = "id") Long id) {
         postServiceInter.deletePostById(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

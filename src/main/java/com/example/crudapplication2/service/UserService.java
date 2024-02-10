@@ -2,6 +2,7 @@ package com.example.crudapplication2.service;
 
 import com.example.crudapplication2.dto.RegisterDto;
 import com.example.crudapplication2.dto.UserDto;
+import com.example.crudapplication2.exceptions.UserNotFoundException;
 import com.example.crudapplication2.models.User;
 import com.example.crudapplication2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,11 +34,9 @@ public class UserService implements UserServiceInter {
 
     @Override
     public UserDto getUserById(Long id) {
-        Optional<User> byId = userRepository.findById(id);
-        if (!byId.isPresent()) {
-            return null;
-        }
-        return userToUserDto(byId.get());
+        User user = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException("User not found with id: " + id));
+
+        return userToUserDto(user);
     }
 
     @Override
