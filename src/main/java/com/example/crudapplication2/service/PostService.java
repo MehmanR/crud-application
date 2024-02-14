@@ -78,7 +78,7 @@ public class PostService implements PostServiceInter {
     }
 
     public static List<Post> ListPostDtoToPostList(List<PostDto> postDtoList){
-        List<Post> postList = new ArrayList<>();
+//        List<Post> postList = new ArrayList<>();
 
        return postDtoList.stream().map(PostService::postDtoToPost).toList();
     }
