@@ -9,8 +9,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class PostService implements PostServiceInter {
@@ -64,10 +66,10 @@ public class PostService implements PostServiceInter {
         }
     }
 
-    private Post postDtoToPost(PostDto postDto) {
+    public static Post postDtoToPost(PostDto postDto) {
         Post post = Post.builder()
                 .description(postDto.getDescription())
-                .user(postDto.getUser())
+                .user( UserService.userDtoToUser(postDto.getUser()))
                 .updateCount(0)
                 .createDate(LocalDateTime.now())
                 .build();
@@ -75,10 +77,16 @@ public class PostService implements PostServiceInter {
         return post;
     }
 
-    private PostDto postToPostDto(Post post) {
+    public static List<Post> ListPostDtoToPostList(List<PostDto> postDtoList){
+        List<Post> postList = new ArrayList<>();
+
+       return postDtoList.stream().map(PostService::postDtoToPost).toList();
+    }
+
+    public static PostDto postToPostDto(Post post) {
         PostDto postDto = PostDto.builder()
                 .description(post.getDescription())
-                .user(post.getUser())
+                .user(UserService.userToUserDto(post.getUser()))
                 .build();
 
         return postDto;

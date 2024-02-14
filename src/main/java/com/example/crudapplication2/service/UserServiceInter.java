@@ -12,5 +12,5 @@ public interface UserServiceInter {
     RegisterDto createUser(RegisterDto userDto);
     void updateUserById(Long id,UserDto userDto);
     void deleteUserById(Long id);
-    UserDto userToUserDto(User user);
+
 }

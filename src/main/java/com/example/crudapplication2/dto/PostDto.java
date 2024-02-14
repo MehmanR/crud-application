@@ -20,7 +20,7 @@ public class PostDto {
     @Size(max = 255)
     private String description;
 
-    @NotBlank
+
     private UserDto user;
 
 }

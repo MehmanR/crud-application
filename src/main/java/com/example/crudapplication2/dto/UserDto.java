@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 @Setter
@@ -36,6 +37,9 @@ public class UserDto {
     @NotBlank
     @Past
     private LocalDate birthDate;
+
+
+    private List<PostDto> postDtoList;
 
 
 }

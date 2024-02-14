@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class UserService implements UserServiceInter {
 
-    UserRepository userRepository;
+   private final UserRepository userRepository;
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -87,8 +87,8 @@ public class UserService implements UserServiceInter {
     private String phoneNumber;
     private LocalDate birthDate;
      */
-    @Override
-    public UserDto userToUserDto(User user) {
+
+    public static UserDto userToUserDto(User user) {
         UserDto userDto = UserDto.builder()
                 .name(user.getName())
                 .surname(user.getSurname())
@@ -100,7 +100,20 @@ public class UserService implements UserServiceInter {
         return userDto;
     }
 
-    public List<UserDto> userListToUserDto(List<User> user) {
+    public static User userDtoToUser(UserDto userDto){
+        User user = User.builder()
+                .name(userDto.getName())
+                .surname(userDto.getSurname())
+                .email(userDto.getEmail())
+                .birthDate( userDto.getBirthDate())
+                .phoneNumber(userDto.getPhoneNumber())
+                .posts( PostService.ListPostDtoToPostList(userDto.getPostDtoList()))
+                .build();
+
+        return user;
+    }
+
+    public static List<UserDto> userListToUserDto(List<User> user) {
         List<UserDto> userDto = new ArrayList<>();
         for (int i = 0; i < user.size(); i++) {
             if (user.get(i) == null) {
